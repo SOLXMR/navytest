@@ -1,16 +1,9 @@
 'use client';
 
-import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import { BrowserRouter } from 'react-router-dom';
 import '../index.css';
 
 const inter = Inter({ subsets: ['latin'] });
-
-export const metadata: Metadata = {
-  title: 'XRPNAVY',
-  description: 'Where Naval Excellence Meets Cryptocurrency Innovation',
-};
 
 export default function RootLayout({
   children,
@@ -19,10 +12,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <title>XRPNAVY - Naval Excellence Meets Cryptocurrency</title>
+        <meta name="description" content="Where Naval Excellence Meets Cryptocurrency Innovation" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/favicon.ico" />
+      </head>
       <body className={inter.className}>
-        <BrowserRouter>
-          {children}
-        </BrowserRouter>
+        {children}
       </body>
     </html>
   );

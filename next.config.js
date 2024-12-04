@@ -2,14 +2,11 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
-  output: 'standalone',
-  experimental: {
-    appDir: true,
+  output: 'export',
+  images: {
+    unoptimized: true
   },
-  webpack: (config) => {
-    config.resolve.fallback = { fs: false, net: false, tls: false };
-    return config;
-  },
+  trailingSlash: true,
 }
 
 module.exports = nextConfig; 
