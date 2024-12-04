@@ -3,19 +3,19 @@ import { motion } from 'framer-motion';
 
 const Roadmap = () => {
   return (
-    <div className="min-h-screen py-20 bg-ripple-blue">
+    <div className="min-h-screen py-12 sm:py-20 bg-ripple-blue">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-20"
+          className="text-center mb-12 sm:mb-20"
         >
-          <h1 className="text-5xl font-military font-bold text-white mb-8">
+          <h1 className="text-3xl sm:text-5xl font-military font-bold text-white mb-6 sm:mb-8 break-words">
             Project <span className="text-gold">Roadmap</span>
           </h1>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+          <p className="text-lg sm:text-xl text-gray-300 max-w-[90vw] sm:max-w-3xl mx-auto break-words">
             Our strategic plan for development and growth, combining military precision
             with blockchain innovation.
           </p>
@@ -23,62 +23,63 @@ const Roadmap = () => {
 
         {/* Timeline */}
         <div className="relative">
-          {/* Vertical Line */}
-          <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gold"></div>
+          {/* Vertical Line - Hidden on mobile, shown on larger screens */}
+          <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gold"></div>
 
           {/* Timeline Items */}
-          <div className="space-y-20">
+          <div className="space-y-8 sm:space-y-20">
             {roadmapItems.map((item, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-                whileInView={{ opacity: 1, x: 0 }}
+                initial={{ opacity: 0, x: 0, y: 20 }}
+                whileInView={{ opacity: 1, x: 0, y: 0 }}
                 transition={{ duration: 0.8 }}
-                className={`flex items-center ${
-                  index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'
+                className={`flex flex-col md:flex-row items-center ${
+                  index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
                 }`}
               >
                 {/* Content */}
-                <div className="w-1/2 px-8">
-                  <div className="bg-navy-blue p-6 rounded-lg shadow-xl">
-                    <div className="flex items-center mb-4">
-                      <div className="text-2xl text-gold mr-4">{item.icon}</div>
-                      <h3 className="text-2xl font-military font-bold text-white">
+                <div className="w-full md:w-1/2 px-0 md:px-8 mb-8 md:mb-0">
+                  <div className="bg-navy-blue p-4 sm:p-6 rounded-lg shadow-xl overflow-hidden">
+                    <div className="flex items-center mb-3 sm:mb-4">
+                      <div className="text-xl sm:text-2xl text-gold mr-3 sm:mr-4 flex-shrink-0">{item.icon}</div>
+                      <h3 className="text-xl sm:text-2xl font-military font-bold text-white break-words">
                         {item.phase}
                       </h3>
                     </div>
-                    <div className="mb-4">
-                      <span className="inline-block bg-xrp-blue text-white text-sm px-3 py-1 rounded-full">
+                    <div className="mb-3 sm:mb-4">
+                      <span className="inline-block bg-xrp-blue text-white text-xs sm:text-sm px-3 py-1 rounded-full">
                         {item.timeline}
                       </span>
                     </div>
-                    <ul className="text-gray-300 space-y-4">
+                    <ul className="text-gray-300 space-y-3 sm:space-y-4">
                       {item.milestones.map((milestone, idx) => (
                         <li key={idx} className="flex items-start">
-                          <span className={`mr-2 ${milestone.completed ? 'text-green-400' : 'text-gold'}`}>
+                          <span className={`mr-2 flex-shrink-0 ${milestone.completed ? 'text-green-400' : 'text-gold'}`}>
                             {milestone.completed ? '✓' : '•'}
                           </span>
-                          <div>
-                            <p className={milestone.completed ? 'text-green-400' : 'text-gray-300'}>
-                              {milestone.text}
-                            </p>
-                            {milestone.link && (
+                          <div className="min-w-0 break-words">
+                            {milestone.link ? (
                               <a
                                 href={milestone.link}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="text-sm text-xrp-blue hover:text-gold transition-colors break-all"
+                                className="text-xrp-blue hover:text-gold transition-colors cursor-pointer text-sm sm:text-base"
                               >
-                                {milestone.link}
+                                {milestone.text} →
                               </a>
+                            ) : (
+                              <p className={`${milestone.completed ? 'text-green-400' : 'text-gray-300'} text-sm sm:text-base`}>
+                                {milestone.text}
+                              </p>
                             )}
                           </div>
                         </li>
                       ))}
                     </ul>
                     {item.status && (
-                      <div className="mt-4 pt-4 border-t border-gray-700">
-                        <span className={`text-sm ${getStatusColor(item.status)}`}>
+                      <div className="mt-3 sm:mt-4 pt-3 sm:pt-4 border-t border-gray-700">
+                        <span className={`text-xs sm:text-sm ${getStatusColor(item.status)}`}>
                           Status: {item.status}
                         </span>
                       </div>
@@ -86,10 +87,10 @@ const Roadmap = () => {
                   </div>
                 </div>
 
-                {/* Timeline Point */}
-                <div className={`w-4 h-4 rounded-full absolute left-1/2 transform -translate-x-1/2 ${
+                {/* Timeline Point - Adjusted for mobile */}
+                <div className={`w-3 h-3 sm:w-4 sm:h-4 rounded-full md:absolute md:left-1/2 md:transform md:-translate-x-1/2 ${
                   item.status === 'Completed' ? 'bg-green-400' : 'bg-gold'
-                }`}></div>
+                } hidden md:block`}></div>
               </motion.div>
             ))}
           </div>
@@ -100,12 +101,12 @@ const Roadmap = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="mt-20 text-center"
+          className="mt-12 sm:mt-20 text-center"
         >
-          <h2 className="text-3xl font-military font-bold text-gold mb-6">
+          <h2 className="text-2xl sm:text-3xl font-military font-bold text-gold mb-4 sm:mb-6 break-words">
             Future Vision
           </h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+          <p className="text-lg sm:text-xl text-gray-300 max-w-[90vw] sm:max-w-3xl mx-auto break-words">
             Our journey continues beyond these milestones as we work to revolutionize
             the intersection of military precision and blockchain technology.
           </p>

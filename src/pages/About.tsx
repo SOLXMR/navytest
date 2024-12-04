@@ -3,19 +3,19 @@ import { motion } from 'framer-motion';
 
 const About = () => {
   return (
-    <div className="min-h-screen py-20 bg-ripple-blue">
+    <div className="min-h-screen py-12 sm:py-20 bg-ripple-blue">
       {/* Mission Statement */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12 sm:mb-20">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           className="text-center"
         >
-          <h1 className="text-5xl font-military font-bold text-white mb-8">
+          <h1 className="text-3xl sm:text-5xl font-military font-bold text-white mb-6 sm:mb-8 break-words">
             About <span className="text-gold">XRP Navy</span>
           </h1>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+          <p className="text-lg sm:text-xl text-gray-300 max-w-[90vw] sm:max-w-3xl mx-auto break-words">
             Memecoins are taking over this market, but XRP Navy goes beyond gambling.
             We are building a movement that will redefine the cryptocurrency landscape.
           </p>
@@ -23,58 +23,31 @@ const About = () => {
       </section>
 
       {/* Values Grid */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12 sm:mb-20">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-12">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
-            className="bg-navy-blue p-8 rounded-lg shadow-xl"
+            className="bg-navy-blue p-6 sm:p-8 rounded-lg shadow-xl overflow-hidden"
           >
-            <h2 className="text-3xl font-military font-bold text-gold mb-6">Our Values</h2>
-            <p className="text-gray-300 mb-6">
+            <h2 className="text-2xl sm:text-3xl font-military font-bold text-gold mb-4 sm:mb-6 break-words">Our Values</h2>
+            <p className="text-gray-300 mb-4 sm:mb-6 text-sm sm:text-base break-words">
               In the vast ocean of memecoins, we sail with purpose. The XRP Navy isn't just another 
               ship in the fleet - we're the whole damn armada! And we're here to show that 
               even in the wildest waters of crypto, we can have fun while staying true to our course.
             </p>
-            <ul className="list-disc list-inside text-gray-300 space-y-4">
-              <li className="flex items-start">
-                <span className="text-gold mr-2">⚓</span>
-                <span>
-                  <strong className="text-gold">Naval Precision:</strong> We run this ship tighter than 
-                  your portfolio during a bull run!
-                </span>
-              </li>
-              <li className="flex items-start">
-                <span className="text-gold mr-2">🌊</span>
-                <span>
-                  <strong className="text-gold">Wave Makers:</strong> When we move, the whole market 
-                  feels the ripple effect (pun intended)
-                </span>
-              </li>
-              <li className="flex items-start">
-                <span className="text-gold mr-2">🎯</span>
-                <span>
-                  <strong className="text-gold">Clear Vision:</strong> While others are playing in 
-                  puddles, we're navigating the seven seas
-                </span>
-              </li>
-              <li className="flex items-start">
-                <span className="text-gold mr-2">💪</span>
-                <span>
-                  <strong className="text-gold">Community Power:</strong> Our crew is stronger than 
-                  a whale's market impact
-                </span>
-              </li>
-              <li className="flex items-start">
-                <span className="text-gold mr-2">🚀</span>
-                <span>
-                  <strong className="text-gold">Innovation Command:</strong> We're not just along 
-                  for the ride, we're steering this ship to the moon!
-                </span>
-              </li>
+            <ul className="list-disc list-inside text-gray-300 space-y-3 sm:space-y-4 text-sm sm:text-base">
+              {values.map((value, index) => (
+                <li key={index} className="flex items-start">
+                  <span className="text-gold mr-2 flex-shrink-0">{value.icon}</span>
+                  <span className="break-words">
+                    <strong className="text-gold">{value.title}:</strong> {value.description}
+                  </span>
+                </li>
+              ))}
             </ul>
-            <p className="text-gray-300 mt-6 italic">
+            <p className="text-gray-300 mt-4 sm:mt-6 italic text-sm sm:text-base break-words">
               Remember sailor: What we do in life ripples in eternity... and on the blockchain!
             </p>
           </motion.div>
@@ -83,15 +56,16 @@ const About = () => {
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
-            className="bg-navy-blue p-8 rounded-lg shadow-xl"
+            className="bg-navy-blue p-6 sm:p-8 rounded-lg shadow-xl overflow-hidden"
           >
-            <h2 className="text-3xl font-military font-bold text-gold mb-6">Our Battle Plan</h2>
-            <div className="space-y-8">
+            <h2 className="text-2xl sm:text-3xl font-military font-bold text-gold mb-4 sm:mb-6 break-words">Our Battle Plan</h2>
+            <div className="space-y-6 sm:space-y-8">
               <div>
-                <h3 className="text-xl font-military font-bold text-white mb-4 flex items-center">
-                  <span className="text-2xl mr-3">🎯</span> Mission Briefing
+                <h3 className="text-lg sm:text-xl font-military font-bold text-white mb-3 sm:mb-4 flex items-center">
+                  <span className="text-xl sm:text-2xl mr-3 flex-shrink-0">🎯</span>
+                  <span className="break-words">Mission Briefing</span>
                 </h3>
-                <p className="text-gray-300">
+                <p className="text-gray-300 text-sm sm:text-base break-words">
                   Listen up, sailors! While the SEC is busy trying to figure out if water is wet, 
                   we're out here turning the XRP ecosystem into the greatest show on the blockchain. 
                   We're not just another memecoin doing backflips in the crypto pool - we're the 
@@ -101,10 +75,11 @@ const About = () => {
               </div>
 
               <div>
-                <h3 className="text-xl font-military font-bold text-white mb-4 flex items-center">
-                  <span className="text-2xl mr-3">🔭</span> Naval Intelligence Report
+                <h3 className="text-lg sm:text-xl font-military font-bold text-white mb-3 sm:mb-4 flex items-center">
+                  <span className="text-xl sm:text-2xl mr-3 flex-shrink-0">🔭</span>
+                  <span className="break-words">Naval Intelligence Report</span>
                 </h3>
-                <p className="text-gray-300">
+                <p className="text-gray-300 text-sm sm:text-base break-words">
                   While other memecoins are playing "wen moon" in their kiddie pools, we're charting 
                   a course through the seven seas of crypto. Our intel suggests that building a 
                   community of diamond-handed sailors is better than a fleet of paper-handed 
@@ -114,7 +89,7 @@ const About = () => {
               </div>
 
               <div className="bg-ripple-blue/30 p-4 rounded-lg border border-gold/20">
-                <p className="text-gold font-military text-center italic">
+                <p className="text-gold font-military text-center italic text-sm sm:text-base break-words">
                   "They laughed at XRP, called it a security... <br/>
                   Now watch us secure these gains!" 💪
                 </p>
@@ -130,62 +105,65 @@ const About = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="bg-gradient-to-r from-navy-blue to-ripple-blue p-8 rounded-lg shadow-xl"
+          className="bg-gradient-to-r from-navy-blue to-ripple-blue p-6 sm:p-8 rounded-lg shadow-xl overflow-hidden"
         >
-          <h2 className="text-3xl font-military font-bold text-gold mb-8 text-center">
+          <h2 className="text-2xl sm:text-3xl font-military font-bold text-gold mb-6 sm:mb-8 text-center break-words">
             Ship's Manifest
           </h2>
           <div className="max-w-3xl mx-auto">
-            <div className="bg-navy-blue/50 backdrop-blur-sm rounded-lg p-6 mb-8">
-              <h3 className="text-xl font-military font-bold text-white mb-4">Token Issuer</h3>
-              <p className="font-mono text-sm break-all text-gold mb-2">
+            <div className="bg-navy-blue/50 backdrop-blur-sm rounded-lg p-4 sm:p-6 mb-6 sm:mb-8 overflow-hidden">
+              <h3 className="text-lg sm:text-xl font-military font-bold text-white mb-3 sm:mb-4 break-words">Token Issuer</h3>
+              <p className="font-mono text-xs sm:text-sm break-all text-gold mb-2 overflow-wrap-anywhere">
                 r4Ap9QUNgUqB4QHNapgwcyduaD2YCrmo3N
               </p>
-              <p className="text-green-400 text-sm">
+              <p className="text-green-400 text-xs sm:text-sm">
                 🔒 Blackholed - Contract is locked and secure!
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-              <div className="bg-navy-blue/50 backdrop-blur-sm rounded-lg p-6">
-                <h3 className="text-xl font-military font-bold text-gold mb-4 flex items-center">
-                  <span className="text-2xl mr-2">🎯</span> Total Supply
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mb-6 sm:mb-8">
+              <div className="bg-navy-blue/50 backdrop-blur-sm rounded-lg p-4 sm:p-6 overflow-hidden">
+                <h3 className="text-lg sm:text-xl font-military font-bold text-gold mb-3 sm:mb-4 flex items-center break-words">
+                  <span className="text-xl sm:text-2xl mr-2 flex-shrink-0">🎯</span>
+                  <span>Total Supply</span>
                 </h3>
-                <p className="text-4xl font-military text-white mb-2">589,000,000</p>
-                <p className="text-gray-300 text-sm italic">
+                <p className="text-2xl sm:text-4xl font-military text-white mb-2 break-words">589,000,000</p>
+                <p className="text-gray-300 text-xs sm:text-sm italic break-words">
                   Yes, THAT famous XRP prophecy number! 🔮
                 </p>
               </div>
 
-              <div className="bg-navy-blue/50 backdrop-blur-sm rounded-lg p-6">
-                <h3 className="text-xl font-military font-bold text-gold mb-4 flex items-center">
-                  <span className="text-2xl mr-2">🔥</span> Liquidity Pool
+              <div className="bg-navy-blue/50 backdrop-blur-sm rounded-lg p-4 sm:p-6 overflow-hidden">
+                <h3 className="text-lg sm:text-xl font-military font-bold text-gold mb-3 sm:mb-4 flex items-center break-words">
+                  <span className="text-xl sm:text-2xl mr-2 flex-shrink-0">🔥</span>
+                  <span>Liquidity Pool</span>
                 </h3>
-                <p className="text-2xl font-military text-white mb-2">12% Burned Forever</p>
-                <p className="text-gray-300 text-sm italic">
+                <p className="text-xl sm:text-2xl font-military text-white mb-2 break-words">12% Burned Forever</p>
+                <p className="text-gray-300 text-xs sm:text-sm italic break-words">
                   What's burned is burned - no rug pulls here! 🚫
                 </p>
               </div>
             </div>
 
-            <div className="bg-navy-blue/50 backdrop-blur-sm rounded-lg p-6">
-              <h3 className="text-xl font-military font-bold text-gold mb-4 flex items-center">
-                <span className="text-2xl mr-2">📊</span> Token Distribution
+            <div className="bg-navy-blue/50 backdrop-blur-sm rounded-lg p-4 sm:p-6 overflow-hidden">
+              <h3 className="text-lg sm:text-xl font-military font-bold text-gold mb-3 sm:mb-4 flex items-center break-words">
+                <span className="text-xl sm:text-2xl mr-2 flex-shrink-0">📊</span>
+                <span>Token Distribution</span>
               </h3>
-              <div className="space-y-4">
+              <div className="space-y-3 sm:space-y-4">
                 <div className="flex items-center justify-between">
-                  <span className="text-white">Dev Wallet:</span>
-                  <span className="text-gold font-military">5%</span>
+                  <span className="text-white text-sm sm:text-base">Dev Wallet:</span>
+                  <span className="text-gold font-military text-sm sm:text-base">5%</span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-white">Liquidity Pool:</span>
-                  <span className="text-gold font-military">12% (Burned 🔥)</span>
+                  <span className="text-white text-sm sm:text-base">Liquidity Pool:</span>
+                  <span className="text-gold font-military text-sm sm:text-base">12% (Burned 🔥)</span>
                 </div>
               </div>
             </div>
 
-            <div className="mt-8 bg-ripple-blue/30 p-4 rounded-lg border border-gold/20">
-              <p className="text-center text-gold font-military">
+            <div className="mt-6 sm:mt-8 bg-ripple-blue/30 p-4 rounded-lg border border-gold/20">
+              <p className="text-center text-gold font-military text-sm sm:text-base break-words">
                 "589 million tokens, 12% burned LP, 5% dev allocation...<br/>
                 Perfectly balanced, as all things should be!" ⚖️
               </p>
@@ -196,5 +174,33 @@ const About = () => {
     </div>
   );
 };
+
+const values = [
+  {
+    icon: "⚓",
+    title: "Naval Precision",
+    description: "We run this ship tighter than your portfolio during a bull run!"
+  },
+  {
+    icon: "🌊",
+    title: "Wave Makers",
+    description: "When we move, the whole market feels the ripple effect (pun intended)"
+  },
+  {
+    icon: "🎯",
+    title: "Clear Vision",
+    description: "While others are playing in puddles, we're navigating the seven seas"
+  },
+  {
+    icon: "💪",
+    title: "Community Power",
+    description: "Our crew is stronger than a whale's market impact"
+  },
+  {
+    icon: "🚀",
+    title: "Innovation Command",
+    description: "We're not just along for the ride, we're steering this ship to the moon!"
+  }
+];
 
 export default About; 
