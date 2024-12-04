@@ -145,8 +145,8 @@ const features = [
   },
   {
     icon: "🌊",
-    title: "Democratic Sharing",
-    description: "Empowering our community through fair and inclusive participation.",
+    title: "Naval Command",
+    description: "Leading with military precision and unified strength in the crypto seas.",
   },
   {
     icon: "🚀",
