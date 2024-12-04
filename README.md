@@ -9,6 +9,9 @@ A modern and engaging website for $XRPNAVY, combining the aesthetics of XRP Ripp
 - Interactive components and engaging user experience
 - Military-inspired design elements
 - Integration with XRP themes
+- Fixed navigation header with mobile responsiveness
+- Social media integration
+- Token information display
 
 ## Tech Stack
 
@@ -21,16 +24,16 @@ A modern and engaging website for $XRPNAVY, combining the aesthetics of XRP Ripp
 ## Prerequisites
 
 Before you begin, ensure you have the following installed:
-- Node.js (v14.0.0 or higher)
-- npm (v6.0.0 or higher)
+- Node.js (v18.0.0 or higher)
+- npm (v8.0.0 or higher)
 
 ## Installation
 
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/yourusername/xrpnavy.git
-cd xrpnavy
+git clone https://github.com/SOLXMR/navyxrp.git
+cd navyxrp
 ```
 
 2. Install dependencies:
@@ -50,14 +53,14 @@ The application will be available at `http://localhost:3000`.
 ## Project Structure
 
 ```
-xrpnavy/
+navyxrp/
 ├── src/
 │   ├── assets/         # Static assets (images, SVGs)
-│   ├── components/     # Reusable components
-│   ├── pages/         # Page components
+│   ├── components/     # Reusable components (Navigation, Footer)
+│   ├── pages/         # Page components (Home, About, Roadmap, Contact)
 │   ├── App.tsx        # Main application component
 │   └── index.tsx      # Application entry point
-├── public/            # Public assets
+├── public/            # Public assets (logo1.png, manifest.json)
 └── package.json       # Project dependencies and scripts
 ```
 
@@ -67,6 +70,18 @@ xrpnavy/
 - `npm test` - Launches the test runner
 - `npm run build` - Builds the app for production
 - `npm run eject` - Ejects from Create React App
+
+## Deployment
+
+The project is configured for deployment on Vercel:
+
+1. The `vercel.json` configuration handles:
+   - Build settings
+   - Route configurations
+   - Cache control headers
+   - Static asset serving
+
+2. Automatic deployments are triggered on push to the main branch
 
 ## Customization
 
@@ -80,24 +95,21 @@ The project uses a custom color palette defined in `tailwind.config.js`:
 ### Typography
 The project uses the Roboto Condensed font family for the military-inspired typography.
 
-## Contributing
+## Social Links
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+- Twitter: [@XRPNAVY](https://x.com/XRPNAVY)
+- Telegram: [t.me/XRPNAVY](https://t.me/XRPNAVY)
+- Linktree: [linktr.ee/XRPNAVY](https://linktr.ee/XRPNAVY)
+
+## Buy $XRPNAVY
+
+Token Issuer / Contract Address: `r4Ap9QUNgUqB4QHNapgwcyduaD2YCrmo3N`
+
+Buy on [FirstLedger](https://firstledger.net/token/r4Ap9QUNgUqB4QHNapgwcyduaD2YCrmo3N/5852504E41565900000000000000000000000000)
 
 ## License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
-
-## Contact
-
-- Website: [https://xrpnavy.com](https://xrpnavy.com)
-- Twitter: [@xrpnavy](https://twitter.com/xrpnavy)
-- Telegram: [t.me/xrpnavy](https://t.me/xrpnavy)
-- Discord: [discord.gg/xrpnavy](https://discord.gg/xrpnavy)
 
 ## Acknowledgments
 
