@@ -30,6 +30,7 @@ const Contact = () => {
         setTimeout(() => setSubmitStatus('idle'), 3000);
       }
     } catch (error) {
+      console.error('Error submitting form:', error);
       setSubmitStatus('error');
       setTimeout(() => setSubmitStatus('idle'), 3000);
     }
