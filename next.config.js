@@ -2,6 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
+  output: 'standalone',
   experimental: {
     appDir: true,
   },
@@ -9,4 +10,6 @@ const nextConfig = {
     config.resolve.fallback = { fs: false, net: false, tls: false };
     return config;
   },
-} 
+}
+
+module.exports = nextConfig; 
