@@ -1,26 +1,38 @@
 {
-  "name": "$XRPNAVY - The Movement",
   "short_name": "$XRPNAVY",
+  "name": "$XRPNAVY - The Movement",
   "description": "This is not a memecoin. This is the movement. XRP is here to stay, and XRPNavy is here to defend.",
-  "start_url": "/",
-  "display": "standalone",
-  "background_color": "#23292F",
-  "theme_color": "#001F3F",
   "icons": [
     {
-      "src": "/favicon.ico",
+      "src": "logo1.png",
       "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
+      "type": "image/png"
     },
     {
-      "src": "/logo1.png",
+      "src": "logo1.png",
       "type": "image/png",
-      "sizes": "192x192"
+      "sizes": "192x192",
+      "purpose": "any maskable"
     },
     {
-      "src": "/logo1.png",
+      "src": "logo1.png",
       "type": "image/png",
-      "sizes": "512x512"
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#001F3F",
+  "background_color": "#23292F",
+  "categories": ["finance", "cryptocurrency"],
+  "screenshots": [
+    {
+      "src": "logo1.png",
+      "sizes": "1200x630",
+      "type": "image/png",
+      "platform": "wide",
+      "label": "$XRPNAVY - The Movement"
     }
   ]
 }
