@@ -18,7 +18,9 @@
 .env.development.local
 .env.test.local
 .env.production.local
+.env*.local
 
+# logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
@@ -26,6 +28,12 @@ yarn-error.log*
 # IDE
 .idea/
 .vscode/
+*.swp
+*.swo
+
+# Next.js
+.next/
+out/
 
 # Vercel
 .vercel

@@ -26,6 +26,14 @@ body {
   font-family: 'Roboto Condensed', sans-serif;
 }
 
+/* Wave Background Pattern */
+.bg-wave-pattern {
+  background-image: url('/src/assets/wave-bg.svg');
+  background-repeat: repeat;
+  background-size: cover;
+  background-position: center;
+}
+
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
@@ -117,4 +125,9 @@ input:focus, textarea:focus, select:focus {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+/* Add some spacing for the fixed header */
+.content-below-header {
+  padding-top: 4rem;
 }

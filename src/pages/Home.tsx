@@ -1,10 +1,10 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import Link from 'next/link';
+import { Link } from 'react-router-dom';
 
 const Home = () => {
   return (
-    <div className="min-h-screen">
+    <div className="flex flex-col">
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden py-12">
         <div className="absolute inset-0 bg-wave-pattern opacity-10"></div>
@@ -44,7 +44,7 @@ const Home = () => {
               >
                 Join the Movement
               </motion.a>
-              <Link href="/about" passHref>
+              <Link to="/about">
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
