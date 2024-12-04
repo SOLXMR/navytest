@@ -73,9 +73,6 @@ const Home = () => {
             <p className="text-lg sm:text-xl text-gray-300 max-w-[90vw] sm:max-w-3xl mx-auto mb-3 sm:mb-4 px-2 break-words">
               That will bring the attention back to XRP
             </p>
-            <p className="text-lg sm:text-xl text-gray-300 max-w-[90vw] sm:max-w-3xl mx-auto px-2 break-words">
-              That will make all the haters who did not trust XRP regret it
-            </p>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
