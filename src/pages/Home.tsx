@@ -8,10 +8,11 @@ const Home = () => {
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden py-12">
         <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0"
           style={{ 
-            backgroundImage: 'url("/xrpback.png")',
-            opacity: '0.15'
+            backgroundImage: 'url(/xrpback.png)',
+            opacity: '0.2',
+            mixBlendMode: 'overlay'
           }}
         ></div>
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
