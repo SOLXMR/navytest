@@ -107,8 +107,7 @@ const Roadmap = () => {
             Future Vision
           </h2>
           <p className="text-lg sm:text-xl text-gray-300 max-w-[90vw] sm:max-w-3xl mx-auto break-words">
-            Our journey continues beyond these milestones as we work to revolutionize
-            the intersection of military precision and blockchain technology.
+            Our roadmap will continue to evolve as we grow our community and develop new opportunities within the XRP ecosystem.
           </p>
         </motion.div>
       </div>
@@ -120,7 +119,7 @@ const roadmapItems = [
   {
     phase: "Phase 1: Initial Launch",
     icon: "🚀",
-    timeline: "Q1 2024",
+    timeline: "Launch Phase",
     status: "Completed",
     milestones: [
       {
@@ -141,7 +140,7 @@ const roadmapItems = [
   {
     phase: "Phase 2: Market Integration",
     icon: "📊",
-    timeline: "Q1 2024",
+    timeline: "Integration Phase",
     status: "Completed",
     milestones: [
       {
@@ -163,7 +162,7 @@ const roadmapItems = [
   {
     phase: "Phase 3: Community Expansion",
     icon: "🌐",
-    timeline: "Q2 2024",
+    timeline: "Growth Phase",
     status: "In Progress",
     milestones: [
       {
@@ -187,7 +186,7 @@ const roadmapItems = [
   {
     phase: "Phase 4: Ecosystem Expansion",
     icon: "🏗️",
-    timeline: "Q2-Q3 2024",
+    timeline: "Development Phase",
     status: "Upcoming",
     milestones: [
       {
