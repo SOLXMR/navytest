@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 
 const Home = () => {
   return (
@@ -21,28 +22,36 @@ const Home = () => {
             <h1 className="text-4xl md:text-6xl font-military font-bold text-white mb-6">
               "What we do in life echoes in eternity"
             </h1>
-            <p className="text-xl md:text-2xl text-gray-300 mb-8 font-military">
+            <p className="text-xl md:text-2xl text-gray-300 mb-4 font-military">
               This is not a memecoin. This is the movement.
+            </p>
+            <p className="text-xl md:text-2xl font-military mb-8" style={{ color: 'var(--gold)' }}>
+              XRP is here to stay, and XRPNavy is here to defend.
             </p>
             <div className="bg-navy-blue/50 backdrop-blur-sm rounded-lg p-4 mb-8 inline-block">
               <p className="text-sm text-gold font-military">Token Issuer</p>
               <p className="text-white font-mono text-sm break-all">r4Ap9QUNgUqB4QHNapgwcyduaD2YCrmo3N</p>
             </div>
             <div className="flex justify-center space-x-4">
-              <motion.button
+              <motion.a
+                href="https://t.me/XRPNAVY"
+                target="_blank"
+                rel="noopener noreferrer"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="bg-xrp-blue text-white px-8 py-3 rounded-lg font-military font-bold hover:bg-blue-600 transition-colors"
               >
                 Join the Movement
-              </motion.button>
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="border-2 border-gold text-gold px-8 py-3 rounded-lg font-military font-bold hover:bg-gold hover:text-navy-blue transition-colors"
-              >
-                Learn More
-              </motion.button>
+              </motion.a>
+              <Link href="/about" passHref>
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="border-2 border-gold text-gold px-8 py-3 rounded-lg font-military font-bold hover:bg-gold hover:text-navy-blue transition-colors"
+                >
+                  Learn More
+                </motion.button>
+              </Link>
             </div>
           </motion.div>
         </div>
