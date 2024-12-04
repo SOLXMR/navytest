@@ -10,6 +10,8 @@ import Home from './pages/Home';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import Roadmap from './pages/Roadmap';
+import Games from './pages/Games';
+import FleetCommander from './pages/games/FleetCommander';
 
 function App() {
   return (
@@ -22,6 +24,8 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/roadmap" element={<Roadmap />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/games" element={<Games />} />
+            <Route path="/games/fleet-commander" element={<FleetCommander />} />
           </Routes>
         </main>
         <Footer />

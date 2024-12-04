@@ -31,6 +31,7 @@ const Navigation = () => {
               <div className="flex flex-wrap justify-center gap-2">
                 <NavLink to="/">Home</NavLink>
                 <NavLink to="/about">About</NavLink>
+                <NavLink to="/games">Games</NavLink>
                 <NavLink to="/roadmap">Roadmap</NavLink>
                 <NavLink to="/contact">Contact</NavLink>
               </div>
