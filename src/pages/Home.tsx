@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import backgroundImage from '../assets/xrpback.png';
 
 const Home = () => {
   return (
@@ -10,7 +11,7 @@ const Home = () => {
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0"
           style={{ 
-            backgroundImage: 'url(/xrpback.png)',
+            backgroundImage: `url(${backgroundImage})`,
             opacity: '0.2',
             mixBlendMode: 'overlay'
           }}
