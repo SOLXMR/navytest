@@ -30,7 +30,7 @@ const Home = () => {
               XRP is here to stay, and XRPNavy is here to defend.
             </p>
             <div className="bg-navy-blue/50 backdrop-blur-sm rounded-lg p-3 sm:p-4 mb-6 sm:mb-8 w-full max-w-[90vw] sm:max-w-md mx-auto overflow-hidden">
-              <p className="text-sm text-gold font-military truncate">Token Issuer</p>
+              <p className="text-sm text-gold font-military truncate">Token Issuer / Contract Address</p>
               <p className="text-white font-mono text-xs sm:text-sm break-all overflow-wrap-anywhere">r4Ap9QUNgUqB4QHNapgwcyduaD2YCrmo3N</p>
             </div>
             <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4 w-full max-w-[90vw] sm:w-auto px-4">
