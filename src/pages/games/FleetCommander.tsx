@@ -63,10 +63,11 @@ const FleetCommander: React.FC = () => {
   const fetchLeaderboard = async () => {
     try {
       const response = await fetch('/api/leaderboard');
-      if (response.ok) {
-        const data = await response.json();
-        setLeaderboard(data);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
       }
+      const data = await response.json();
+      setLeaderboard(data);
     } catch (error) {
       console.error('Error fetching leaderboard:', error);
     }
@@ -74,6 +75,9 @@ const FleetCommander: React.FC = () => {
 
   useEffect(() => {
     fetchLeaderboard();
+    // Refresh leaderboard every 30 seconds
+    const interval = setInterval(fetchLeaderboard, 30000);
+    return () => clearInterval(interval);
   }, []);
 
   const submitScore = async () => {
@@ -93,9 +97,11 @@ const FleetCommander: React.FC = () => {
         }),
       });
 
-      if (response.ok) {
-        await fetchLeaderboard();
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
       }
+
+      await fetchLeaderboard();
     } catch (error) {
       console.error('Error submitting score:', error);
     } finally {
