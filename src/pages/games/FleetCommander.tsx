@@ -11,6 +11,12 @@ interface GameObject {
   speed?: number;
 }
 
+interface LeaderboardEntry {
+  username: string;
+  score: number;
+  timestamp: number;
+}
+
 const GAME_HEIGHT = 300;
 const GAME_WIDTH = 800;
 const GRAVITY = 0.6;
@@ -28,6 +34,10 @@ const FleetCommander: React.FC = () => {
   const [gameOver, setGameOver] = useState(false);
   const [score, setScore] = useState(0);
   const [highScore, setHighScore] = useState(0);
+  const [username, setUsername] = useState('');
+  const [showLeaderboard, setShowLeaderboard] = useState(false);
+  const [leaderboard, setLeaderboard] = useState<LeaderboardEntry[]>([]);
+  const [isSubmittingScore, setIsSubmittingScore] = useState(false);
   const requestRef = useRef<number>();
   const previousTimeRef = useRef<number>();
 
@@ -40,6 +50,58 @@ const FleetCommander: React.FC = () => {
     frameCount: 0,
     score: 0
   });
+
+  // Load username from localStorage
+  useEffect(() => {
+    const savedUsername = localStorage.getItem('fleetCommanderUsername');
+    if (savedUsername) {
+      setUsername(savedUsername);
+    }
+  }, []);
+
+  // Fetch leaderboard data
+  const fetchLeaderboard = async () => {
+    try {
+      const response = await fetch('/api/leaderboard');
+      if (response.ok) {
+        const data = await response.json();
+        setLeaderboard(data);
+      }
+    } catch (error) {
+      console.error('Error fetching leaderboard:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchLeaderboard();
+  }, []);
+
+  const submitScore = async () => {
+    if (!username || isSubmittingScore) return;
+    
+    setIsSubmittingScore(true);
+    try {
+      const response = await fetch('/api/submit-score', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username,
+          score: Math.floor(score),
+          timestamp: Date.now(),
+        }),
+      });
+
+      if (response.ok) {
+        await fetchLeaderboard();
+      }
+    } catch (error) {
+      console.error('Error submitting score:', error);
+    } finally {
+      setIsSubmittingScore(false);
+    }
+  };
 
   const startGame = () => {
     if (requestRef.current) {
@@ -230,6 +292,7 @@ const FleetCommander: React.FC = () => {
 
   // Add touch event handlers and mobile optimizations
   const handleTouchStart = useCallback((e: TouchEvent) => {
+    if (gameOver) return; // Don't handle touch events when game over modal is shown
     e.preventDefault(); // Prevent scrolling while playing
     if (!isPlaying && !gameOver) {
       startGame();
@@ -239,12 +302,16 @@ const FleetCommander: React.FC = () => {
   }, [isPlaying, gameOver, jump]);
 
   useEffect(() => {
-    // Add touch event listeners
-    window.addEventListener('touchstart', handleTouchStart, { passive: false });
+    const canvas = canvasRef.current;
+    if (canvas) {
+      canvas.addEventListener('touchstart', handleTouchStart, { passive: false });
+    }
     window.addEventListener('keydown', handleKeyPress);
     
     return () => {
-      window.removeEventListener('touchstart', handleTouchStart);
+      if (canvas) {
+        canvas.removeEventListener('touchstart', handleTouchStart);
+      }
       window.removeEventListener('keydown', handleKeyPress);
       if (requestRef.current) {
         cancelAnimationFrame(requestRef.current);
@@ -284,11 +351,56 @@ const FleetCommander: React.FC = () => {
             ← Back to Games
           </Link>
           <h1 className="text-3xl md:text-4xl font-military font-bold text-white mb-2 md:mb-4">
-            Naval Runner
+            Fleet Commander
           </h1>
           <div className="text-lg md:text-xl text-white mb-1 md:mb-2">Score: {Math.floor(score)}</div>
           <div className="text-base md:text-lg text-gold mb-2 md:mb-4">High Score: {Math.floor(highScore)}</div>
+          {!isPlaying && !gameOver && (
+            <div className="mb-4">
+              <input
+                type="text"
+                placeholder="Enter your username"
+                value={username}
+                onChange={(e) => {
+                  const newUsername = e.target.value.slice(0, 15);
+                  setUsername(newUsername);
+                  localStorage.setItem('fleetCommanderUsername', newUsername);
+                }}
+                className="px-4 py-2 rounded-lg bg-navy-blue border-2 border-gold text-white focus:outline-none focus:border-white"
+                maxLength={15}
+              />
+            </div>
+          )}
+          <button
+            onClick={() => setShowLeaderboard(!showLeaderboard)}
+            className="text-gold hover:text-white text-sm md:text-base underline"
+          >
+            {showLeaderboard ? 'Hide Leaderboard' : 'Show Leaderboard'}
+          </button>
         </motion.div>
+
+        {showLeaderboard && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mb-4 bg-navy-blue rounded-lg p-4 border-2 border-gold"
+          >
+            <h2 className="text-2xl font-military text-white mb-4">Top 10 Commanders</h2>
+            <div className="space-y-2">
+              {leaderboard.map((entry, index) => (
+                <div key={index} className="flex justify-between items-center text-white">
+                  <span className="font-military">
+                    {index + 1}. {entry.username}
+                  </span>
+                  <span className="text-gold">{Math.floor(entry.score)}</span>
+                </div>
+              ))}
+              {leaderboard.length === 0 && (
+                <div className="text-white text-center">No scores yet. Be the first!</div>
+              )}
+            </div>
+          </motion.div>
+        )}
 
         <div className="flex justify-center mb-2 md:mb-4">
           <canvas
@@ -296,7 +408,7 @@ const FleetCommander: React.FC = () => {
             width={GAME_WIDTH}
             height={GAME_HEIGHT}
             className="border-2 border-gold bg-navy-blue rounded-lg shadow-lg max-w-full"
-            style={{ touchAction: 'none' }} // Prevent default touch actions
+            style={{ touchAction: 'none' }}
           />
         </div>
 
@@ -307,7 +419,7 @@ const FleetCommander: React.FC = () => {
               animate={{ opacity: 1 }}
               className="mb-2 md:mb-4 text-sm md:text-base"
             >
-              Tap screen or press SPACE to start
+              {username ? 'Tap screen or press SPACE to start' : 'Enter your username to play'}
             </motion.div>
           )}
           <div className="text-xs md:text-sm text-gray-400 mt-2 md:mt-4">
@@ -322,9 +434,12 @@ const FleetCommander: React.FC = () => {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
+            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-[100]"
           >
-            <div className="bg-navy-blue p-6 md:p-8 rounded-lg border-2 border-gold w-full max-w-sm mx-auto">
+            <div 
+              className="bg-navy-blue p-6 md:p-8 rounded-lg border-2 border-gold w-full max-w-sm mx-auto"
+              onClick={(e) => e.stopPropagation()}
+            >
               <h2 className="text-xl md:text-2xl font-military text-white mb-3 md:mb-4 text-center">
                 Game Over!
               </h2>
@@ -332,26 +447,51 @@ const FleetCommander: React.FC = () => {
                 Final Score: {Math.floor(score)}
               </p>
               <div className="flex flex-col gap-3 md:gap-4">
-                <button
-                  onClick={() => {
-                    // Open tweet in new window/tab
-                    window.open(createTweetURL(score), '_blank', 'noopener,noreferrer');
-                  }}
-                  className="bg-[#1DA1F2] text-white font-military font-bold px-6 md:px-8 py-3 md:py-4 rounded-lg text-center flex items-center justify-center gap-2 text-sm md:text-base active:scale-95 transition-transform"
-                >
-                  <svg className="w-4 h-4 md:w-5 md:h-5" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
-                  </svg>
-                  Tweet Score
-                </button>
-                <button
-                  onClick={() => {
-                    startGame();
-                  }}
-                  className="bg-gold text-black font-military font-bold px-6 md:px-8 py-3 md:py-4 rounded-lg text-sm md:text-base active:scale-95 transition-transform"
-                >
-                  Play Again
-                </button>
+                {!isSubmittingScore ? (
+                  <>
+                    <button
+                      type="button"
+                      disabled={!username}
+                      onClick={submitScore}
+                      className="bg-green-500 text-white font-military font-bold px-6 md:px-8 py-3 md:py-4 rounded-lg text-sm md:text-base active:scale-95 transition-transform disabled:opacity-50"
+                    >
+                      Submit Score
+                    </button>
+                    <button
+                      type="button"
+                      onTouchEnd={(e) => {
+                        e.preventDefault();
+                        window.open(createTweetURL(score), '_blank', 'noopener,noreferrer');
+                      }}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        window.open(createTweetURL(score), '_blank', 'noopener,noreferrer');
+                      }}
+                      className="bg-[#1DA1F2] text-white font-military font-bold px-6 md:px-8 py-3 md:py-4 rounded-lg text-center flex items-center justify-center gap-2 text-sm md:text-base active:scale-95 transition-transform"
+                    >
+                      <svg className="w-4 h-4 md:w-5 md:h-5" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                      </svg>
+                      Tweet Score
+                    </button>
+                    <button
+                      type="button"
+                      onTouchEnd={(e) => {
+                        e.preventDefault();
+                        startGame();
+                      }}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        startGame();
+                      }}
+                      className="bg-gold text-black font-military font-bold px-6 md:px-8 py-3 md:py-4 rounded-lg text-sm md:text-base active:scale-95 transition-transform"
+                    >
+                      Play Again
+                    </button>
+                  </>
+                ) : (
+                  <div className="text-white text-center">Submitting score...</div>
+                )}
               </div>
             </div>
           </motion.div>
