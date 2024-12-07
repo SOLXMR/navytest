@@ -1,13 +1,20 @@
 import { kv } from '@vercel/kv';
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 
+interface ScoreSubmission {
+  username: string;
+  score: number;
+  timestamp: number;
+}
+
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== 'POST') {
     return res.status(405).json({ message: 'Method not allowed' });
   }
 
   try {
-    const { username, score, timestamp } = req.body;
+    const body = req.body as ScoreSubmission;
+    const { username, score, timestamp } = body;
 
     if (!username || typeof score !== 'number' || !timestamp) {
       return res.status(400).json({ message: 'Invalid request body' });

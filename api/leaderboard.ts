@@ -1,6 +1,12 @@
 import { kv } from '@vercel/kv';
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 
+interface LeaderboardEntry {
+  username: string;
+  score: number;
+  timestamp: number;
+}
+
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== 'GET') {
     return res.status(405).json({ message: 'Method not allowed' });
@@ -14,13 +20,13 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     });
 
     // Format the scores
-    const leaderboard = [];
+    const leaderboard: LeaderboardEntry[] = [];
     for (let i = 0; i < scores.length; i += 2) {
       const scoreData = await kv.hgetall(`fleetcommander:score:${scores[i]}`);
       if (scoreData && typeof scoreData.username === 'string' && typeof scoreData.timestamp === 'string') {
         leaderboard.push({
           username: scoreData.username,
-          score: parseInt(scores[i + 1]),
+          score: Number(scores[i + 1]),
           timestamp: parseInt(scoreData.timestamp)
         });
       }
