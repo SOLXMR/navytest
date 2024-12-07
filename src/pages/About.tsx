@@ -66,11 +66,12 @@ const About = () => {
                   <span className="break-words">Mission Briefing</span>
                 </h3>
                 <p className="text-gray-300 text-sm sm:text-base break-words">
-                  Listen up, sailors! While the SEC is busy trying to figure out if water is wet, 
-                  we're out here turning the XRP ecosystem into the greatest show on the blockchain. 
-                  We're not just another memecoin doing backflips in the crypto pool - we're the 
-                  whole naval parade! Our mission? To make the XRP army so bright, even the SEC 
-                  will need sunglasses. 🕶️
+                  Attention on deck! As the NAVY of the XRP Ledger, we stand as its 
+                  steadfast defenders and guardians. Our primary mission is clear: to protect 
+                  and strengthen the XRP ecosystem through unwavering vigilance and strategic 
+                  operations. Just as a navy safeguards its nation's waters, we are committed 
+                  to defending the integrity and security of the XRP Ledger. Stand ready, 
+                  sailors - we are the shield that protects the future of digital finance. ⚓
                 </p>
               </div>
 
@@ -80,11 +81,11 @@ const About = () => {
                   <span className="break-words">Naval Intelligence Report</span>
                 </h3>
                 <p className="text-gray-300 text-sm sm:text-base break-words">
-                  While other memecoins are playing "wen moon" in their kiddie pools, we're charting 
-                  a course through the seven seas of crypto. Our intel suggests that building a 
-                  community of diamond-handed sailors is better than a fleet of paper-handed 
-                  mercenaries. And guess what? We're recruiting the craziest, most dedicated crew 
-                  this side of the blockchain! 🏴‍☠️
+                  Our intelligence confirms what we've known all along - the XRP Ledger 
+                  requires a dedicated force to protect its interests and ensure its success. 
+                  We're assembling an elite fleet of steadfast defenders, committed to 
+                  safeguarding the ecosystem against any threats. The NAVY stands ready 
+                  to deploy at a moment's notice. 🛡️
                 </p>
               </div>
 
@@ -178,28 +179,28 @@ const About = () => {
 const values = [
   {
     icon: "⚓",
-    title: "Naval Precision",
-    description: "We run this ship tighter than your portfolio during a bull run!"
+    title: "Unwavering Defense",
+    description: "Standing guard over the XRP Ledger with vigilance and determination"
   },
   {
-    icon: "🌊",
-    title: "Wave Makers",
-    description: "When we move, the whole market feels the ripple effect (pun intended)"
+    icon: "🛡️",
+    title: "Strategic Command",
+    description: "Coordinating operations to protect and strengthen the XRP ecosystem"
   },
   {
     icon: "🎯",
-    title: "Clear Vision",
-    description: "While others are playing in puddles, we're navigating the seven seas"
+    title: "Mission Focus",
+    description: "Dedicated to securing the future of the XRP Ledger"
   },
   {
-    icon: "💪",
-    title: "Community Power",
-    description: "Our crew is stronger than a whale's market impact"
+    icon: "⚔️",
+    title: "Combat Ready",
+    description: "Always prepared to defend against threats to our ecosystem"
   },
   {
-    icon: "🚀",
-    title: "Innovation Command",
-    description: "We're not just along for the ride, we're steering this ship to the moon!"
+    icon: "🔱",
+    title: "Naval Discipline",
+    description: "Operating with military precision and unwavering loyalty"
   }
 ];
 
