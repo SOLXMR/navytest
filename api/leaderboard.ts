@@ -7,10 +7,7 @@ interface LeaderboardEntry {
   timestamp: number;
 }
 
-interface ScoreData {
-  username: string;
-  timestamp: string;
-}
+type KVScoreData = Record<string, string>;
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== 'GET') {
@@ -19,19 +16,24 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   try {
     // Get all scores from the sorted set
-    const scores: [string, string][] = await kv.zrange('fleetcommander:scores', 0, 9, {
+    const scoresData = await kv.zrange('fleetcommander:scores', 0, 9, {
       withScores: true,
       rev: true // Get highest scores first
-    });
+    }) as string[];
 
     // Format the scores
     const leaderboard: LeaderboardEntry[] = [];
-    for (let i = 0; i < scores.length; i += 2) {
-      const scoreData = await kv.hgetall<ScoreData>(`fleetcommander:score:${scores[i]}`);
+    
+    for (let i = 0; i < scoresData.length; i += 2) {
+      const scoreId = scoresData[i];
+      const score = parseFloat(scoresData[i + 1]);
+      
+      const scoreData = await kv.hgetall(`fleetcommander:score:${scoreId}`) as KVScoreData;
+      
       if (scoreData && scoreData.username && scoreData.timestamp) {
         leaderboard.push({
           username: scoreData.username,
-          score: Number(scores[i + 1]),
+          score,
           timestamp: parseInt(scoreData.timestamp)
         });
       }
