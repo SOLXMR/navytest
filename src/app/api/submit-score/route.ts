@@ -1,16 +1,16 @@
 import { kv } from '@vercel/kv';
-import { NextResponse } from 'next/server';
+import type { Request, Response } from 'express';
 
-export async function POST(request: Request) {
+export default async function handler(req: Request, res: Response) {
+  if (req.method !== 'POST') {
+    return res.status(405).json({ message: 'Method not allowed' });
+  }
+
   try {
-    const body = await request.json();
-    const { username, score, timestamp } = body;
+    const { username, score, timestamp } = req.body;
 
     if (!username || typeof score !== 'number' || !timestamp) {
-      return NextResponse.json(
-        { message: 'Invalid request body' },
-        { status: 400 }
-      );
+      return res.status(400).json({ message: 'Invalid request body' });
     }
 
     // Create a unique ID for this score
@@ -28,12 +28,9 @@ export async function POST(request: Request) {
       member: scoreId
     });
 
-    return NextResponse.json({ message: 'Score submitted successfully' });
+    return res.status(200).json({ message: 'Score submitted successfully' });
   } catch (error) {
     console.error('Error submitting score:', error);
-    return NextResponse.json(
-      { message: 'Error submitting score' },
-      { status: 500 }
-    );
+    return res.status(500).json({ message: 'Error submitting score' });
   }
 } 

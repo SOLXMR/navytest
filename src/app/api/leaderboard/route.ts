@@ -1,7 +1,11 @@
 import { kv } from '@vercel/kv';
-import { NextResponse } from 'next/server';
+import type { Request, Response } from 'express';
 
-export async function GET() {
+export default async function handler(req: Request, res: Response) {
+  if (req.method !== 'GET') {
+    return res.status(405).json({ message: 'Method not allowed' });
+  }
+
   try {
     // Get all scores from the sorted set
     const scores = await kv.zrange('fleetcommander:scores', 0, 9, {
@@ -22,12 +26,9 @@ export async function GET() {
       }
     }
 
-    return NextResponse.json(leaderboard);
+    return res.status(200).json(leaderboard);
   } catch (error) {
     console.error('Error fetching leaderboard:', error);
-    return NextResponse.json(
-      { message: 'Error fetching leaderboard' },
-      { status: 500 }
-    );
+    return res.status(500).json({ message: 'Error fetching leaderboard' });
   }
 } 
