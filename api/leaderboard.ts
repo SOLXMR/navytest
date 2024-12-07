@@ -7,6 +7,11 @@ interface LeaderboardEntry {
   timestamp: number;
 }
 
+interface ScoreData {
+  username: string;
+  timestamp: string;
+}
+
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== 'GET') {
     return res.status(405).json({ message: 'Method not allowed' });
@@ -14,7 +19,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   try {
     // Get all scores from the sorted set
-    const scores = await kv.zrange('fleetcommander:scores', 0, 9, {
+    const scores: [string, string][] = await kv.zrange('fleetcommander:scores', 0, 9, {
       withScores: true,
       rev: true // Get highest scores first
     });
@@ -22,8 +27,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     // Format the scores
     const leaderboard: LeaderboardEntry[] = [];
     for (let i = 0; i < scores.length; i += 2) {
-      const scoreData = await kv.hgetall(`fleetcommander:score:${scores[i]}`);
-      if (scoreData && typeof scoreData.username === 'string' && typeof scoreData.timestamp === 'string') {
+      const scoreData = await kv.hgetall<ScoreData>(`fleetcommander:score:${scores[i]}`);
+      if (scoreData && scoreData.username && scoreData.timestamp) {
         leaderboard.push({
           username: scoreData.username,
           score: Number(scores[i + 1]),
