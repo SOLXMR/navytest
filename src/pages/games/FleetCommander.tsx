@@ -35,7 +35,6 @@ const FleetCommander: React.FC = () => {
   const [score, setScore] = useState(0);
   const [highScore, setHighScore] = useState(0);
   const [username, setUsername] = useState('');
-  const [showLeaderboard, setShowLeaderboard] = useState(false);
   const [leaderboard, setLeaderboard] = useState<LeaderboardEntry[]>([]);
   const [isSubmittingScore, setIsSubmittingScore] = useState(false);
   const requestRef = useRef<number>();
@@ -377,15 +376,7 @@ const FleetCommander: React.FC = () => {
               />
             </div>
           )}
-          <button
-            onClick={() => setShowLeaderboard(!showLeaderboard)}
-            className="text-gold hover:text-white text-sm md:text-base underline"
-          >
-            {showLeaderboard ? 'Hide Leaderboard' : 'Show Leaderboard'}
-          </button>
-        </motion.div>
-
-        {showLeaderboard && (
+          
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -406,7 +397,8 @@ const FleetCommander: React.FC = () => {
               )}
             </div>
           </motion.div>
-        )}
+
+        </motion.div>
 
         <div className="flex justify-center mb-2 md:mb-4">
           <canvas
