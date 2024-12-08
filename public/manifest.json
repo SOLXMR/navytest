@@ -1,12 +1,13 @@
 {
-  "short_name": "$XRPNAVY",
-  "name": "$XRPNAVY - The Movement",
-  "description": "This is not a memecoin. This is the movement. XRP is here to stay, and XRPNavy is here to defend.",
+  "short_name": "XRP Navy",
+  "name": "XRP Navy - Defending the XRP Ledger",
+  "description": "Join the elite force defending the XRP Ledger. XRP Navy stands as the vanguard of the ecosystem, operating with military precision and unwavering dedication.",
   "icons": [
     {
       "src": "logo1.png",
       "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     },
     {
       "src": "logo1.png",
@@ -32,7 +33,7 @@
       "sizes": "1200x630",
       "type": "image/png",
       "platform": "wide",
-      "label": "$XRPNAVY - The Movement"
+      "label": "XRP Navy - Defending the XRP Ledger"
     }
   ]
 }
