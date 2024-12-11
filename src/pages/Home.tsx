@@ -1,9 +1,58 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import backgroundImage from '../assets/xrpback.png';
 
 const Home = () => {
+  const [showWalletOptions, setShowWalletOptions] = useState(false);
+
+  const WalletOptionsModal = () => (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="fixed inset-0 bg-black/80 flex items-center justify-center p-4 z-50"
+      onClick={() => setShowWalletOptions(false)}
+    >
+      <motion.div
+        initial={{ scale: 0.9, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        exit={{ scale: 0.9, opacity: 0 }}
+        className="bg-navy-blue/90 p-6 rounded-lg max-w-md w-full space-y-4"
+        onClick={e => e.stopPropagation()}
+      >
+        <h3 className="text-xl font-military font-bold text-gold text-center mb-4">Choose Your Wallet</h3>
+        
+        <a
+          href="https://xrpnavy-wallet.vercel.app/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="block w-full bg-xrp-blue text-white px-6 py-4 rounded-lg font-military font-bold hover:bg-blue-600 transition-all text-center"
+        >
+          Web Wallet
+          <p className="text-sm font-normal mt-1 text-gray-300">Access your wallet through any browser</p>
+        </a>
+        
+        <a
+          href="https://t.me/XRPNAVYbot"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="block w-full bg-[#229ED9] text-white px-6 py-4 rounded-lg font-military font-bold hover:bg-[#1d8abf] transition-all text-center"
+        >
+          Telegram Wallet
+          <p className="text-sm font-normal mt-1 text-gray-300">Use our secure Telegram bot wallet</p>
+        </a>
+        
+        <button
+          onClick={() => setShowWalletOptions(false)}
+          className="w-full border border-gray-600 text-gray-400 px-6 py-3 rounded-lg font-military hover:bg-gray-800 transition-all mt-2"
+        >
+          Close
+        </button>
+      </motion.div>
+    </motion.div>
+  );
+
   return (
     <div className="flex flex-col">
       {/* Hero Section */}
@@ -37,10 +86,30 @@ const Home = () => {
             <p className="text-lg sm:text-xl md:text-2xl font-military mb-6 sm:mb-8 px-2 break-words max-w-[90vw] sm:max-w-2xl" style={{ color: 'var(--gold)' }}>
               XRP is here to stay, and XRPNavy is here to defend.
             </p>
+
+            {/* New Wallet Button Section */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4, duration: 0.8 }}
+              className="w-full max-w-[90vw] sm:max-w-md mx-auto mb-6 sm:mb-8"
+            >
+              <motion.button
+                onClick={() => setShowWalletOptions(true)}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="w-full bg-gradient-to-r from-gold via-yellow-500 to-gold text-navy-blue px-6 py-4 rounded-lg font-military font-bold text-lg sm:text-xl hover:brightness-110 transition-all shadow-lg hover:shadow-xl relative overflow-hidden group"
+              >
+                <span className="absolute inset-0 bg-white/20 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></span>
+                Click HERE to Open our New XRP Wallet
+              </motion.button>
+            </motion.div>
+
             <div className="bg-navy-blue/50 backdrop-blur-sm rounded-lg p-3 sm:p-4 mb-6 sm:mb-8 w-full max-w-[90vw] sm:max-w-md mx-auto overflow-hidden">
               <p className="text-sm text-gold font-military truncate">Token Issuer / Contract Address</p>
               <p className="text-white font-mono text-xs sm:text-sm break-all overflow-wrap-anywhere">r4Ap9QUNgUqB4QHNapgwcyduaD2YCrmo3N</p>
             </div>
+
             <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4 w-full max-w-[90vw] sm:w-auto px-4">
               <motion.a
                 href="https://t.me/XRPNAVY"
@@ -148,6 +217,10 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+      <AnimatePresence>
+        {showWalletOptions && <WalletOptionsModal />}
+      </AnimatePresence>
     </div>
   );
 };
